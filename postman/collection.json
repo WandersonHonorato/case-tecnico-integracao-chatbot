@@ -1,0 +1,77 @@
+{
+  "info": {
+    "name": "Suri - Segunda via de boleto (integração via API)",
+    "description": "Testes do serviço próprio (Node.js + Express) que valida CPF, busca o boleto e envia a resposta ativamente via API da Suri.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "apiKey", "value": "analistatecnico" }
+  ],
+  "item": [
+    {
+      "name": "Health check",
+      "request": { "method": "GET", "url": "{{baseUrl}}/health" }
+    },
+    {
+      "name": "Segunda via - CPF válido com boleto (sucesso)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "x-api-key", "value": "{{apiKey}}" }
+        ],
+        "url": "{{baseUrl}}/api/segunda-via",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cpf\": \"529.982.247-25\",\n  \"contactId\": \"contato-teste-1\",\n  \"contactName\": \"Maria\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Segunda via - CPF inválido",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "x-api-key", "value": "{{apiKey}}" }
+        ],
+        "url": "{{baseUrl}}/api/segunda-via",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cpf\": \"111.111.111-11\",\n  \"contactId\": \"contato-teste-2\",\n  \"contactName\": \"Teste\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Segunda via - CPF válido, não encontrado na base",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "x-api-key", "value": "{{apiKey}}" }
+        ],
+        "url": "{{baseUrl}}/api/segunda-via",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cpf\": \"111.444.777-35\",\n  \"contactId\": \"contato-teste-3\",\n  \"contactName\": \"Sem Boleto\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Segunda via - CPF ausente",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "x-api-key", "value": "{{apiKey}}" }
+        ],
+        "url": "{{baseUrl}}/api/segunda-via",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"contactId\": \"contato-teste-4\"\n}"
+        }
+      }
+    }
+  ]
+}
