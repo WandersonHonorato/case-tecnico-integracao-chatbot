@@ -1,7 +1,18 @@
 # case-tecnico-integracao-chatbot
 
-Integração entre a API chatbot **Suri (Chatbot Maker)** e um serviço próprio (Node.js + Express) para
+Integração entre a API **Suri (Chatbot)** e um serviço próprio (Node.js + Express) para
 envio de **2ª via de boleto via WhatsApp**, com validação de CPF.
+
+## 🛠️ Tecnologias utilizadas
+
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![REST API](https://img.shields.io/badge/REST%20API-4A4A55?style=for-the-badge&logo=json&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
 ## Como funciona
 
@@ -25,20 +36,20 @@ WhatsApp → Flow Suri (captura CPF) → POST /api/integracaoAPI (este serviço)
 ## Estrutura do projeto
 
 ```
-app.js                          # monta o Express (testável, sem listen())
+app.js                          # monta o Express 
 server.js                       # entrypoint - sobe o servidor HTTP
 src/
   config/env.js                 # variáveis de ambiente
   controllers/integracaoApi.controller.js
   routes/integracaoApi.routes.js
   services/
-    cpf.service.js              # validação de CPF (módulo 11)
+    cpf.service.js              # validação de CPF
     boleto.repository.js        # busca o boleto (JSON local, plugável)
     suriApi.client.js           # cliente da API da Suri (Bearer token)
   middleware/                   # apiKey.middleware.js, errorHandler.js
   data/boletos.json             # base de boletos de teste
 public/files/                   # PDFs mockados dos boletos
-tests/                          # Jest + Supertest
+tests/                          # Jest
 ```
 
 ## Rodando localmente
@@ -98,4 +109,4 @@ verificador válido) estão em `src/data/boletos.json`.
 ```bash
 docker compose up --build
 ```
-## Autor: Wanderson Honorato
+## Autor: Wanderson Honorato Araujo
