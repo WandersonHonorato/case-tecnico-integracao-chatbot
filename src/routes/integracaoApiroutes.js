@@ -2,10 +2,6 @@ const { Router } = require('express');
 const { IntegracaoApiController } = require('../controllers/segundaVia.controller');
 const { apiKeyGuard } = require('../middleware/apiKey.middleware');
 
-/**
- * @param {import('../services/boleto.repository').JsonBoletoRepository} repository
- * @param {import('../services/suriApi.client').SuriApiClient} suriApiClient
- */
 function integracaoApiRouter(repository, suriApiClient) {
   const router = Router();
 
