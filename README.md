@@ -1,4 +1,4 @@
-# case-tecnico-integracao-chatbot
+# Case Tecnico - Integracao Chatbot
 
 Integração entre a API **Suri (Chatbot)** e um serviço próprio (Node.js + Express) para
 envio de **2ª via de boleto via WhatsApp**, com validação de CPF.
