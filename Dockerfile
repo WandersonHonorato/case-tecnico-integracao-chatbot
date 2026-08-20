@@ -6,8 +6,9 @@ ENV NODE_ENV=production
 COPY package*.json ./
 RUN npm ci --omit=dev
 
+COPY app.js server.js ./
 COPY src ./src
 COPY public ./public
 
 EXPOSE 3000
-CMD ["node", "src/server.js"]
+CMD ["node", "server.js"]
