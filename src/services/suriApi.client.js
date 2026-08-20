@@ -63,8 +63,8 @@ class SuriApiClient {
    * @param {string} media.fileName - nome do arquivo
    */
   async enviarMensagemDocumento(contactId, { url, fileName }) {
-    if (!this.estaConfigurado()) {
-      logger.warn('SuriApiClient não configurado (SURI_API_BASE_URL/SURI_API_TOKEN ausentes)');
+       if (!this.clienteConfigurado()) {
+      logger.warn('SuriApiClient não configurado');
       return undefined;
     }
 
