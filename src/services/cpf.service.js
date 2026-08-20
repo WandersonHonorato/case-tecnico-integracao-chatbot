@@ -18,6 +18,26 @@ function formatCpf(normalized) {
 }
 
 /**
+ * Calcula um dígito verificador do CPF pelo algoritmo do módulo 11
+ * regra matemática usada para gerar os 2 últimos dígitos do CPF.
+ * @param {string} base - sequência de dígitos usada no cálculo
+ * @param {number} weightStart - peso do primeiro dígito da base
+ * @returns {number} dígito verificador calculado (0-9)
+ */
+function calcDigit(base, weightStart) {
+  let sum = 0;
+  let weight = weightStart;
+
+  for (const char of base) {
+    sum += Number(char) * weight;
+    weight -= 1;
+  }
+
+  const remainder = sum % 11;
+  return remainder < 2 ? 0 : 11 - remainder;
+}
+
+/**
  * Valida um CPF (aceita tanto formatado quanto só dígitos) e devolve um resultado estruturado.
  * @param {string} raw 
  * @returns {{
