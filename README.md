@@ -22,7 +22,8 @@ envio de **2ª via de boleto via WhatsApp**, com validação de CPF.
    API da Suri** (`Authorization: Bearer <token>`) para entregar o PDF — ou uma mensagem de erro,
    se o CPF for inválido ou não houver boleto para ele.
 
-   OBSERVAÇÃO: Os 10 CPFs Mockados de teste (todos com dígito verificador válido) estão em `src/data/boletos.json`.
+   **OBSERVAÇÃO: Os 10 CPFs Mockados de teste (todos com dígito verificador válido) estão em `src/data/boletos.json`.**
+
 
 ```
 WhatsApp → Flow Suri (captura CPF) → POST /api/integracaoAPI (este serviço)
