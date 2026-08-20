@@ -5,11 +5,11 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 
-const { env } = require('./config/env');
-const { integracaoApiRouter } = require('./routes/integracaoApi.routes')
-const { JsonBoletoRepository } = require('./services/boleto.repository');
-const { SuriApiClient } = require('./servicessuriApi.client');
-const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
+const { env } = require('./src/config/env');
+const { integracaoApiRouter } = require('./src/routes/integracaoApi.routes');
+const { JsonBoletoRepository } = require('./src/services/boleto.repository');
+const { SuriApiClient } = require('./src/services/suriApi.client');
+const { errorHandler, notFoundHandler } = require('./src/middleware/errorHandler');
 
 function createApp(options = {}) {
   const repository = options.repository || new JsonBoletoRepository();
@@ -37,14 +37,14 @@ function createApp(options = {}) {
   app.use('/api', limiter);
 
   // Arquivos estáticos
-  app.use('/files', express.static(path.join(__dirname, '..', 'public', 'files')));
+  app.use('/files', express.static(path.join(__dirname, 'public', 'files')));
 
 
   app.get('/health', (_req, res) => {
     res.status(200).json({ status: 'ok', service: 'suri-segunda-via-boleto' });
   });
 
-  app.use('/api', integracaoApi(repository, suriApiClient));
+  app.use('/api', integracaoApiRouter(repository, suriApiClient));
 
   // --- Tratamento de erro
   app.use(notFoundHandler);
